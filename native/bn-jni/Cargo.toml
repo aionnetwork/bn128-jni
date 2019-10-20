@@ -1,0 +1,18 @@
+[package]
+name = "bn-jni"
+version = "1.0.0"
+authors = ["gzhong"]
+edition = "2018"
+
+[lib]
+#crate-type = ["staticlib"]
+crate-type = ["cdylib"]
+
+[dependencies]
+rand = { version = "0.5", features = ["i128_support"] }
+bn = { path = "../bn" }
+jni = "0.13.1"
+hex = "0.4.0"
+
+[dev-dependencies]
+hex = "0.4.0"
