@@ -71,7 +71,7 @@ public class G16SquarePreimageTest {
         try {
             r = G16Verifier.verify(input, new G16Verifier.Proof(a, b, c));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            assertTrue(e.getMessage().equalsIgnoreCase("NotOnCurve"));
         }
 
         assertFalse(r);

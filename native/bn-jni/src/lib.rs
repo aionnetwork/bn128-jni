@@ -63,7 +63,6 @@ const FP_SIZE:usize = 32;
 
 #[no_mangle]
 pub extern "system" fn Java_org_aion_tetryon_AltBn128Jni_ping(env: JNIEnv, class: JClass)-> jint {
-    println!("Just called a Rust function from rust-jni!");
     1337 as jint
 }
 
