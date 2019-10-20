@@ -8,6 +8,7 @@ import java.math.BigInteger;
  * <p>
  * Ported from https://github.com/Zokrates/ZoKrates/blob/master/zokrates_core/src/proof_system/bn128/g16.rs
  */
+@SuppressWarnings("unused")
 public class Pairing {
 
     /**
@@ -40,7 +41,7 @@ public class Pairing {
      * @param p2
      * @return
      */
-    public static boolean pairing(G1Point[] p1, G2Point[] p2) {
+    public static boolean pairing(G1Point[] p1, G2Point[] p2) throws Exception {
         if (p1.length != p2.length) {
             throw new IllegalArgumentException("Points are not in pair");
         }
@@ -55,31 +56,19 @@ public class Pairing {
         return AltBn128.ecPair(g1ListData.toByteArray(), g2ListData.toByteArray());
     }
 
-    public static boolean pairingProd1(G1Point a1, G2Point a2) {
+    public static boolean pairingProd1(G1Point a1, G2Point a2) throws Exception {
         return pairing(new G1Point[]{a1}, new G2Point[]{a2});
     }
 
-    public static boolean pairingProd2(G1Point a1, G2Point a2, G1Point b1, G2Point b2) {
+    public static boolean pairingProd2(G1Point a1, G2Point a2, G1Point b1, G2Point b2) throws Exception {
         return pairing(new G1Point[]{a1, b1}, new G2Point[]{a2, b2});
     }
 
-    public static boolean pairingProd3(G1Point a1, G2Point a2, G1Point b1, G2Point b2, G1Point c1, G2Point c2) {
+    public static boolean pairingProd3(G1Point a1, G2Point a2, G1Point b1, G2Point b2, G1Point c1, G2Point c2) throws Exception {
         return pairing(new G1Point[]{a1, b1, c1}, new G2Point[]{a2, b2, c2});
     }
 
-    public static boolean pairingProd4(G1Point a1, G2Point a2, G1Point b1, G2Point b2, G1Point c1, G2Point c2, G1Point d1, G2Point d2) {
-        System.out.println("a1: " + a1);
-        System.out.println("a2: " + a2);
-
-        System.out.println("b1: " + b1);
-        System.out.println("b2: " + b2);
-
-        System.out.println("c1: " + c1);
-        System.out.println("c2: " + c2);
-
-        System.out.println("d1: " + d1);
-        System.out.println("d2: " + d2);
-
+    public static boolean pairingProd4(G1Point a1, G2Point a2, G1Point b1, G2Point b2, G1Point c1, G2Point c2, G1Point d1, G2Point d2) throws Exception {
         return pairing(new G1Point[]{a1, b1, c1, d1}, new G2Point[]{a2, b2, c2, d2});
     }
 }

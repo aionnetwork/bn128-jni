@@ -19,7 +19,6 @@ public class G1Test {
         // 11d1d762d8996b2912960dafeba739869f50683ea8da27ca8748f72b8b2103e6
         // 11ddab98366953a843783b67302cd3def9ab7131948553fac8e16440da3c8d40
 
-        System.out.println(Fp.FIELD_MODULUS.toByteArray().length);
         Fp ax = new Fp(new BigInteger("222480c9f95409bfa4ac6ae890b9c150bc88542b87b352e92950c340458b0c09", 16));
         Fp ay = new Fp(new BigInteger("2976efd698cf23b414ea622b3f720dd9080d679042482ff3668cb2e32cad8ae2", 16));
         Fp bx = new Fp(new BigInteger("1bd20beca3d8d28e536d2b5bd3bf36d76af68af5e6c96ca6e5519ba9ff8f5332", 16));
@@ -28,7 +27,14 @@ public class G1Test {
         Fp cy = new Fp(new BigInteger("19cd640dd28c9811ebaaa095a16b16190d08d6906c4f926fce581985fe35be0e", 16));
         G1Point a = new G1Point(ax, ay);
         G1Point b = new G1Point(bx, by);
-        G1Point c = G1.add(a, b);
+
+        G1Point c = G1Point.INF;
+
+        try {
+            c = G1.add(a, b);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         assertEquals(c.x, cx);
         assertEquals(c.y, cy);
@@ -52,7 +58,14 @@ public class G1Test {
         Fp qy = new Fp(new BigInteger("0b68b46b86de49221fe4dbdce9b88518812c9d48fb502ada0a2ad9fc28312c89", 16));
         G1Point p = new G1Point(px, py);
         BigInteger s = new BigInteger("30586f85e8fcea91c0db1ed30aacf7350e72efd4cf756b3ce309f2159e275ff9", 16);
-        G1Point q = G1.mul(p, s);
+
+        G1Point q = G1Point.INF;
+
+        try {
+            q = G1.mul(p, s);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         assertEquals(q.x, qx);
         assertEquals(q.y, qy);

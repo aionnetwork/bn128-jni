@@ -31,22 +31,14 @@ public class PairingTest {
                 new BigInteger("020401d78e6fe746fe3d9512f9b4eedcfdd7eb5d08e307f1d6ee5d38f9a253ec", 16));
         G2Point g2 = new G2Point(g2x, g2y);
 
-        assertTrue(Pairing.pairingProd2(g11, g2, g12, g2));
-    }
+        boolean r = false;
 
-    @Test
-    public void pairingProd1Test() {
-        Fp g1x = new Fp(new BigInteger("07f4a1ab12b1211149fa0aed8ade3442b774893dcd1caffb8693ade54999c164", 16));
-        Fp g1y = new Fp(new BigInteger("23b7f10c5e1aeaffafa088f1412c0f307969ba3f8f9d5920214a4cb91693fab5", 16));
-        G1Point g1 = new G1Point(g1x, g1y);
+        try {
+            r = Pairing.pairingProd2(g11, g2, g12, g2);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
-        Fp2 g2x = new Fp2(new BigInteger("1f6cc814cf1df1ceb663378c496f168bcd21e19bb529e90fcf3721f8df6b4128", 16),
-                          new BigInteger("079ee30e2c79e15be67645838a3177f681ab111edacf6f4867e8eed753ed9681", 16));
-        Fp2 g2y = new Fp2(new BigInteger("2779dd0accaa1391e29ad54bf065819cac3129edda4eaf909d6ea2c7495a47f7", 16),
-                          new BigInteger("20105b11ae5fbdc7067102d4260c8913cdcb512632680221d7644f9928a7e51d", 16));
-        G2Point g2 = new G2Point(g2x, g2y);
-
-        boolean r = Pairing.pairingProd1(g1, g2);
         assertTrue(r);
     }
 }

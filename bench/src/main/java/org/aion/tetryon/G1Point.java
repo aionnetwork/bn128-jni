@@ -1,15 +1,31 @@
 package org.aion.tetryon;
 
+import java.math.BigInteger;
+
 /**
  * Represents a point on G1.
  */
+@SuppressWarnings("unused")
 public class G1Point {
     public final Fp x;
     public final Fp y;
 
+    public static final G1Point INF = new G1Point(new Fp(BigInteger.ZERO), new Fp(BigInteger.ZERO));
+
     public G1Point(Fp x, Fp y) {
         this.x = x;
         this.y = y;
+    }
+
+    /**
+     * Overleaded constructor, generate G1Point using String representation of x & y coordinates
+     *
+     * @param x hexadecimal representation of the x-coordinate
+     * @param y hexadecimal representation of the x-coordinate
+     */
+    public G1Point(String x, String y) {
+        this.x = new Fp(new BigInteger(x, 16));
+        this.y = new Fp(new BigInteger(y, 16));
     }
 
     public boolean isZero() {

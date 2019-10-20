@@ -22,7 +22,7 @@ public class G1 {
         return new G1Point(p.x, new Fp(q.subtract(p.y.c0.mod(q))));
     }
 
-    public static G1Point add(G1Point p1, G1Point p2) {
+    public static G1Point add(G1Point p1, G1Point p2) throws Exception {
         byte[] p1data = Util.serializeG1(p1);
         byte[] p2data = Util.serializeG1(p2);
         byte[] resultData = AltBn128.g1EcAdd(p1data, p2data);
@@ -30,10 +30,8 @@ public class G1 {
         return result;
     }
 
-    public static G1Point mul(G1Point p, BigInteger s) {
+    public static G1Point mul(G1Point p, BigInteger s) throws Exception {
         byte[] pdata = Util.serializeG1(p);
-
-
         byte[] resultData = AltBn128.g1EcMul(pdata, s);
         G1Point result = Util.deserializeG1(resultData);
         return result;

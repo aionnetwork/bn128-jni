@@ -32,7 +32,15 @@ public class G16SquarePreimageTest {
                 new BigInteger("0000000000000000000000000000000000000000000000000000000000000001", 16)};
 
         // transaction should succeed
-        assertTrue(G16Verifier.verify(input, new G16Verifier.Proof(a, b, c)));
+        boolean r = false;
+
+        try {
+            r = G16Verifier.verify(input, new G16Verifier.Proof(a, b, c));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertTrue(r);
     }
 
     // negative test-case for square pre-image verifier: a=337, b=113570 (a^2 != b)
@@ -58,7 +66,15 @@ public class G16SquarePreimageTest {
                 new BigInteger("0000000000000000000000000000000000000000000000000000000000000000", 16)};
 
         // transaction should succeed
-        assertFalse(G16Verifier.verify(input, new G16Verifier.Proof(a, b, c)));
+        boolean r = false;
+
+        try {
+            r = G16Verifier.verify(input, new G16Verifier.Proof(a, b, c));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertFalse(r);
     }
 
     /**
@@ -133,7 +149,7 @@ public class G16SquarePreimageTest {
             return new VerifyingKey(alpha, beta, gamma, delta, gamma_abc);
         }
 
-        public static boolean verify(BigInteger[] input, Proof proof) {
+        public static boolean verify(BigInteger[] input, Proof proof) throws Exception {
             BigInteger snarkScalarField = new BigInteger("21888242871839275222246405745257275088548364400416034343698204186575808495617");
             VerifyingKey vk = verifyingKey();
             require(input.length + 1 == vk.gamma_abc.length);

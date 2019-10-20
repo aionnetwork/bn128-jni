@@ -29,7 +29,7 @@ public class AltBn128 {
      * @param point2 point in G1, encoded like so: [p.x || p.y]. Each coordinate is 32-byte aligned.
      *
      */
-    public static byte[] g1EcAdd(byte[] point1, byte[] point2) {
+    public static byte[] g1EcAdd(byte[] point1, byte[] point2) throws Exception {
         // assert valid data.
         assert (point1 != null && point2 != null &&
                 point1.length == G1_POINT_SIZE && point2.length == G1_POINT_SIZE);
@@ -44,7 +44,7 @@ public class AltBn128 {
      * @param point point in G1, encoded like so: [p.x || p.y]. Each coordinate is 32-byte aligned.
      * @param scalar natural number (> 0), byte aligned to 32 bytes.
      */
-    public static byte[] g1EcMul(byte[] point, BigInteger scalar) {
+    public static byte[] g1EcMul(byte[] point, BigInteger scalar) throws Exception {
         // assert valid data.
         assert (point != null && scalar != null &&
                 point.length == G1_POINT_SIZE && scalar.signum() != -1); // scalar can't be negative (it can be zero or positive)
@@ -54,9 +54,6 @@ public class AltBn128 {
 
         byte[] sdata_aligned = new byte[WORD_SIZE];
         System.arraycopy(sdata, 0, sdata_aligned, WORD_SIZE - sdata.length, sdata.length);
-
-        System.out.println("s: " + Util.bytesToHex(sdata_aligned));
-        System.out.println("p: " + Util.bytesToHex(point));
 
         // call jni
         return Holder.INSTANCE.g1EcMul(point, sdata_aligned);
@@ -76,7 +73,7 @@ public class AltBn128 {
      *                      Each coordinate is byte aligned to 32 bytes.
      *
      */
-    public static boolean ecPair(byte[] g1_point_list, byte[] g2_point_list) {
+    public static boolean ecPair(byte[] g1_point_list, byte[] g2_point_list) throws Exception {
         // assert valid data.
         assert (g1_point_list != null && g2_point_list != null &&
                 g1_point_list.length % G1_POINT_SIZE == 0 && g2_point_list.length % G2_POINT_SIZE == 0); // data is well-aligned

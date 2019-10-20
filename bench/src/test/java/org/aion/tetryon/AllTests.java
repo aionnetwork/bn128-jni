@@ -11,6 +11,6 @@ import org.junit.runners.Suite.SuiteClasses;
     G1Test.class,
     JniTest.class,
     PairingTest.class,
-    //G16SquarePreimageTest.class,
+    G16SquarePreimageTest.class,
 })
 public class AllTests {}
