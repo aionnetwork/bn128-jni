@@ -22,8 +22,10 @@ public class Util {
     public static G1Point deserializeG1(byte[] data) {
         byte[] pxData = Arrays.copyOfRange(data, 0, FP_SIZE);
         byte[] pyData = Arrays.copyOfRange(data, FP_SIZE, data.length);
+
         Fp p1x = new Fp(new BigInteger(pxData));
         Fp p1y = new Fp(new BigInteger(pyData));
+
         G1Point p1 = new G1Point(p1x, p1y);
         return p1;
     }
@@ -45,14 +47,29 @@ public class Util {
         return data;
     }
 
+    public static byte[] serializeScalar(BigInteger scalar) {
+        assert (scalar.signum() != -1); // scalar can't be negative (it can be zero or positive)
+
+        byte[] sdata = scalar.toByteArray();
+        assert (sdata.length <= FP_SIZE);
+
+        byte[] sdata_aligned = new byte[FP_SIZE];
+        System.arraycopy(sdata, 0, sdata_aligned, FP_SIZE - sdata.length, sdata.length);
+
+        return sdata_aligned;
+
+    }
+
     private static final char[] HEX_ARRAY = "0123456789abcdef".toCharArray();
     public static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
+
         for (int j = 0; j < bytes.length; j++) {
             int v = bytes[j] & 0xFF;
             hexChars[j * 2] = HEX_ARRAY[v >>> 4];
             hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
         }
+
         return new String(hexChars);
     }
 

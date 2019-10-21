@@ -17,17 +17,6 @@ public class G1Point {
         this.y = y;
     }
 
-    /**
-     * Overleaded constructor, generate G1Point using String representation of x & y coordinates
-     *
-     * @param x hexadecimal representation of the x-coordinate
-     * @param y hexadecimal representation of the x-coordinate
-     */
-    public G1Point(String x, String y) {
-        this.x = new Fp(new BigInteger(x, 16));
-        this.y = new Fp(new BigInteger(y, 16));
-    }
-
     public boolean isZero() {
         return x.isZero() && y.isZero();
     }

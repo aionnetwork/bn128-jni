@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import java.math.BigInteger;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -26,7 +27,10 @@ public class G1Test {
         G1Point c = G1Point.INF;
 
         try {
+            long start = System.nanoTime();
             c = G1.add(a, b);
+            long ms = TimeUnit.MILLISECONDS.convert(System.nanoTime() - start, TimeUnit.NANOSECONDS);
+            System.out.println("g1EcAdd test 1 took " + ms + " ms");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -50,7 +54,10 @@ public class G1Test {
         G1Point c = G1Point.INF;
 
         try {
+            long start = System.nanoTime();
             c = G1.add(a, b);
+            long ms = TimeUnit.MILLISECONDS.convert(System.nanoTime() - start, TimeUnit.NANOSECONDS);
+            System.out.println("g1EcAdd test 2 took " + ms + " ms");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -90,7 +97,10 @@ public class G1Test {
         G1Point q = G1Point.INF;
 
         try {
+            long start = System.nanoTime();
             q = G1.mul(p, s);
+            long ms = TimeUnit.MILLISECONDS.convert(System.nanoTime() - start, TimeUnit.NANOSECONDS);
+            System.out.println("g1EcMul test 1 took " + ms + " ms");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -109,7 +119,10 @@ public class G1Test {
         G1Point q = new G1Point(new Fp(BigInteger.ONE), new Fp(BigInteger.ONE));
 
         try {
+            long start = System.nanoTime();
             q = G1.mul(p, BigInteger.ZERO);
+            long ms = TimeUnit.MILLISECONDS.convert(System.nanoTime() - start, TimeUnit.NANOSECONDS);
+            System.out.println("g1EcMul test 2 took " + ms + " ms");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

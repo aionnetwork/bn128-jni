@@ -3,6 +3,8 @@ package org.aion.tetryon;
 import org.junit.Test;
 
 import java.math.BigInteger;
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.Assert.assertTrue;
 
 public class PairingTest {
@@ -25,7 +27,10 @@ public class PairingTest {
         boolean r = false;
 
         try {
+            long start = System.nanoTime();
             r = Pairing.pairingProd2(g11, g2, g12, g2);
+            long ms = TimeUnit.MILLISECONDS.convert(System.nanoTime() - start, TimeUnit.NANOSECONDS);
+            System.out.println("ecPair pairingProd2 test took " + ms + " ms");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
